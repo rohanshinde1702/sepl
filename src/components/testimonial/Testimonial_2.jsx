@@ -1,8 +1,10 @@
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { FaQuoteLeft } from "react-icons/fa6";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaChevronDown, FaTimes, FaExpandAlt } from "react-icons/fa";
 
 // Swiper CSS styles
 import "swiper/css";
@@ -10,32 +12,113 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const Testimonial_2 = () => {
+  const [expandedId, setExpandedId] = useState(null);
+  const [modalItem, setModalItem] = useState(null);
+  const swiperRef = useRef(null);
+  const containerRef = useRef(null);
+
   const testimonials = [
     {
       id: 1,
       quote:
-        "SEPL delivered the project on time with excellent quality and professional team support. Their commitment to safety and execution is truly commendable.",
-      author: "Rajesh Mehta",
-      role: "Project Manager, Reliance Industries",
+        "We at Talati and Panthaky Associates have been working with Subhash Electricals for over 20 years and have had a longstanding professional and personal relationship with them. They are our primary electrical contractors by choice and over the years we have successfully worked on countless projects together. They have always been on the cutting edge of technology, always keeping up with new trends and keeping us designers in the loop… And they have always had the best understanding of the requirement of our clients, integrating our designs to suit not only their needs but also the difficult Mumbai climate, while working out the electrical solutions in tandem with us. We are happy to have this relationship with them and wish them the best for all their future ventures!",
+      author: "Ria Talati",
+      role: "Director, Talati & Panthaky associated Pvt Ltd",
     },
     {
       id: 2,
       quote:
-        "The team at SEPL has shown exceptional performance in execution. Raising the standards in accuracy and precision along with efficiency and top-notch quality in their work.",
-      author: "Ria Talati",
-      role: "Director, Talati & Panthaky Associated Pvt Ltd",
+        "Your team has completed the project successfully and shown a high level of professionalism and involvement in the project. It's a real achievement when the staff does this in the absence of the team leader. It's a pleasure working with SEPL.",
+      author: "Ujwala Kumthekar",
+      role: "Architect",
     },
     {
       id: 3,
       quote:
-        "SEPL's engineering capability and turnkey execution in high-voltage substations is commendable. Their commitment to safety protocols and on-time commissioning exceeded our expectations.",
-      author: "Vikram Singhania",
-      role: "VP Operations, Apex Chemical Industries",
+        "The team at SEPL has shown an exceptional performance in their execution. Raising the standards in accuracy and precision along with efficiency and top-notch quality in their work.",
+      author: "",
+      role: "",
+    },
+    {
+      id: 4,
+      quote:
+        "SEPL has delivered its promise beyond our expectations. The way they go about every step of the project, right from the planning, to the organizing and the coordination to the execution. This experience has been just wonderful.",
+      author: "",
+      role: "",
+    },
+    {
+      id: 5,
+      quote:
+        "SEPL is one of those very few companies, who have strong virtues and business ethics. With a team of professionals, they make sure their final execution is state-of-the-art.",
+      author: "",
+      role: "",
     },
   ];
 
+  const handleToggle = (id, targetBtn) => {
+    const card = targetBtn ? targetBtn.closest(".testimonial2-card") : null;
+    if (card) {
+      const quoteText = card.querySelector(".testimonial2-quote-text");
+      const btnText = targetBtn.querySelector(".btn-text");
+      const btnIcon = targetBtn.querySelector(".btn-icon");
+
+      if (quoteText) {
+        const isClamped = quoteText.classList.contains("line-clamp-4");
+        if (isClamped) {
+          quoteText.classList.remove("line-clamp-4");
+          if (btnText) btnText.textContent = "Read Less";
+          if (btnIcon) btnIcon.classList.add("rotate-180");
+          setExpandedId(id);
+        } else {
+          quoteText.classList.add("line-clamp-4");
+          if (btnText) btnText.textContent = "Read More";
+          if (btnIcon) btnIcon.classList.remove("rotate-180");
+          setExpandedId(null);
+        }
+      }
+    } else {
+      setExpandedId((prev) => (prev === id ? null : id));
+    }
+
+    if (swiperRef.current) {
+      setTimeout(() => {
+        swiperRef.current?.update();
+      }, 50);
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleContainerClick = (e) => {
+      const btn = e.target.closest("[data-read-more-btn]");
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = Number(btn.getAttribute("data-testimonial-id"));
+        handleToggle(id, btn);
+        return;
+      }
+
+      const modalBtn = e.target.closest("[data-modal-btn]");
+      if (modalBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = Number(modalBtn.getAttribute("data-testimonial-id"));
+        const item = testimonials.find((t) => t.id === id);
+        if (item) setModalItem(item);
+      }
+    };
+
+    container.addEventListener("click", handleContainerClick);
+    return () => {
+      container.removeEventListener("click", handleContainerClick);
+    };
+  }, [testimonials]);
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white w-full overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white w-full overflow-hidden relative">
       <div className="container">
         {/* Section Header */}
         <motion.div
@@ -69,17 +152,30 @@ const Testimonial_2 = () => {
             transition={{ duration: 0.6 }}
             className="w-full lg:w-[58%] xl:w-[60%] min-w-0"
           >
-            <div className="bg-[#F5F8FC] rounded-2xl p-6 sm:p-8 md:p-10 border border-slate-100 shadow-xs relative">
+            <div
+              ref={containerRef}
+              className="bg-[#F5F8FC] rounded-2xl p-6 sm:p-8 md:p-10 border border-slate-100 shadow-xs relative"
+            >
               <Swiper
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper;
+                }}
+                preventClicks={false}
+                preventClicksPropagation={false}
+                touchStartPreventDefault={false}
                 modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={24}
                 slidesPerView={1}
                 loop={true}
-                autoplay={{
-                  delay: 4500,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true,
-                }}
+                autoplay={
+                  expandedId || modalItem
+                    ? false
+                    : {
+                        delay: 4500,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                      }
+                }
                 pagination={{
                   clickable: true,
                   el: ".testimonial2-custom-pagination",
@@ -92,34 +188,90 @@ const Testimonial_2 = () => {
                 }}
                 className="w-full"
               >
-                {testimonials.map((item) => (
-                  <SwiperSlide key={item.id}>
-                    <div className="flex items-start gap-4 sm:gap-6">
-                      {/* Left: Navy Circle Quote Mark */}
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0E2A62] text-white flex items-center justify-center shrink-0 shadow-md">
-                        <FaQuoteLeft className="text-sm sm:text-base text-white" />
-                      </div>
+                {testimonials.map((item, index) => {
+                  const isLong = item.quote.length > 250;
+                  const isExpanded = expandedId === item.id;
 
-                      {/* Right: Quote Content & Author */}
-                      <div className="flex flex-col justify-between min-h-[170px] sm:min-h-[160px] flex-1">
-                        {/* Quote Text */}
-                        <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
-                          &ldquo;{item.quote}&rdquo;
-                        </p>
+                  return (
+                    <SwiperSlide
+                      key={`${item.id}-${index}`}
+                      className="!h-auto flex flex-col"
+                    >
+                      <div className="testimonial2-card flex items-start gap-4 sm:gap-6 flex-1 min-h-[220px] sm:min-h-[240px] flex-col sm:flex-row justify-between">
+                        {/* Left: Navy Circle Quote Mark & Optional Modal Button */}
+                        <div className="flex sm:flex-col items-center justify-between sm:justify-start gap-3 w-full sm:w-auto shrink-0">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0E2A62] text-white flex items-center justify-center shadow-md">
+                            <FaQuoteLeft className="text-sm sm:text-base text-white" />
+                          </div>
 
-                        {/* Author Info */}
-                        <div className="mt-6 pt-2">
-                          <h4 className="text-[#0E2A62] font-bold text-sm sm:text-base">
-                            {item.author}
-                          </h4>
-                          <p className="text-slate-500 text-xs sm:text-sm font-medium mt-0.5">
-                            {item.role}
-                          </p>
+                          {isLong && (
+                            <button
+                              type="button"
+                              data-modal-btn
+                              data-testimonial-id={item.id}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setModalItem(item);
+                              }}
+                              title="Read full testimonial in popup"
+                              className="swiper-no-swiping text-slate-400 hover:text-[#0E2A62] p-1.5 rounded-lg hover:bg-slate-200/60 transition-colors cursor-pointer"
+                            >
+                              <FaExpandAlt className="text-xs" />
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Right: Quote Content & Author */}
+                        <div className="flex flex-col justify-between flex-1 w-full min-h-[190px] sm:min-h-[210px]">
+                          {/* Quote Text */}
+                          <div>
+                            <p
+                              className={`testimonial2-quote-text text-slate-700 text-sm sm:text-base leading-relaxed font-normal transition-all duration-300 ${
+                                isLong && !isExpanded ? "line-clamp-4" : ""
+                              }`}
+                            >
+                              &ldquo;{item.quote}&rdquo;
+                            </p>
+
+                            {isLong && (
+                              <button
+                                type="button"
+                                data-read-more-btn
+                                data-testimonial-id={item.id}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleToggle(item.id, e.currentTarget);
+                                }}
+                                className="swiper-no-swiping mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#0E2A62] hover:text-[#F1C652] transition-colors cursor-pointer group/btn relative z-10"
+                              >
+                                <span className="btn-text">
+                                  {isExpanded ? "Read Less" : "Read More"}
+                                </span>
+                                <FaChevronDown
+                                  className={`btn-icon text-[10px] transition-transform duration-200 ${
+                                    isExpanded
+                                      ? "rotate-180"
+                                      : "group-hover/btn:translate-y-0.5"
+                                  }`}
+                                />
+                              </button>
+                            )}
+                          </div>
+
+                          {/* Author Info */}
+                          <div className="mt-6 pt-3 border-t border-slate-200/60 flex flex-col justify-center min-h-[48px]">
+                            <h4 className="text-[#0E2A62] font-bold text-sm sm:text-base">
+                              {item.author || "Client Testimonial"}
+                            </h4>
+                            <p className="text-slate-500 text-xs sm:text-sm font-medium mt-0.5">
+                              {item.role || "SEPL Valued Client"}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
 
               {/* Bottom Controls Row: Navigation Arrows inside Card (bottom-right) */}
@@ -174,6 +326,49 @@ const Testimonial_2 = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Full Testimonial Modal Popup */}
+      {modalItem && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+          onClick={() => setModalItem(null)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setModalItem(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-[#0E2A62] p-2 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
+              aria-label="Close modal"
+            >
+              <FaTimes className="text-base" />
+            </button>
+
+            {/* Quote Icon */}
+            <div className="text-[#F1C652] text-3xl sm:text-4xl mb-4">
+              <FaQuoteLeft />
+            </div>
+
+            {/* Full Quote */}
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed italic font-normal">
+              &ldquo;{modalItem.quote}&rdquo;
+            </p>
+
+            {/* Author Info */}
+            <div className="pt-5 mt-6 border-t border-slate-100 flex flex-col">
+              <h4 className="text-[#0E2A62] font-bold text-base sm:text-lg">
+                {modalItem.author || "Client Testimonial"}
+              </h4>
+              <p className="text-slate-500 text-xs sm:text-sm font-medium mt-0.5">
+                {modalItem.role || "SEPL Valued Client"}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

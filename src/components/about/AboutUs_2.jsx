@@ -71,7 +71,7 @@ const AboutUs_2 = () => {
               {/* Foreground Image */}
               <div className="relative z-10 rounded-lg overflow-hidden shadow-xl aspect-4/3 w-full bg-slate-100">
                 <img
-                  src="/images/about-2.png"
+                  src="/images/about-3.png"
                   alt="Subaash Electrical Industrial Refinery Plant"
                   className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                 />

@@ -12,38 +12,33 @@ const Project = () => {
   const projects = [
     {
       id: 1,
-      img: "/images/projects/substation.jpg",
-      title: "Substation Projects",
-      subTitle: "High Voltage & Distribution",
-      category: "Infrastructure",
+      img: "/images/projects/building-1.jpg",
+      title: "Building Projects",
+      category: "Buildings",
     },
     {
       id: 2,
-      img: "/images/projects/industrial.jpg",
-      title: "Industrial Projects",
-      subTitle: "Process & Manufacturing",
-      category: "Industrial",
+      img: "/images/projects/educational-1.jpg",
+      title: "Educational Projects",
+      category: "Educational",
     },
     {
       id: 3,
-      img: "/images/projects/commercial.jpg",
-      title: "Commercial Projects",
-      subTitle: "Offices & Complexes",
-      category: "Commercial",
+      img: "/images/projects/hospitality-1.jpg",
+      title: "News Cafe Delhi Restaurant",
+      category: "Hospitality",
     },
     {
       id: 4,
-      img: "/images/projects/renewable.jpg",
-      title: "Renewable Energy",
-      subTitle: "Solar & Wind Substation EPC",
-      category: "Clean Energy",
+      img: "/images/projects/deloitte.jpg",
+      title: "Deloitte Office",
+      category: "Offices",
     },
     {
       id: 5,
-      img: "/images/projects/substation.jpg",
-      title: "Transmission Networks",
-      subTitle: "Grid & Switchyard Solutions",
-      category: "Power Grid",
+      img: "/images/projects/showroom-1.jpg",
+      title: "Fcml Showrooms",
+      category: "showrooms",
     },
   ];
 
@@ -123,7 +118,7 @@ const Project = () => {
             >
               {projects.map((item) => (
                 <SwiperSlide key={item.id} className="h-auto">
-                  <div className="bg-white rounded-xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full group cursor-pointer">
+                  <div className="bg-white rounded-xl overflow-hidden border border-slate-200/90 shadow-xs transition-all duration-300 flex flex-col h-full group cursor-pointer">
                     {/* Project Card Image */}
                     <div className="h-44 sm:h-48 md:h-52 w-full overflow-hidden relative bg-slate-100">
                       <img

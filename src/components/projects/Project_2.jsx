@@ -5,18 +5,26 @@ const Project_2 = () => {
   const featuredProjects = [
     {
       id: 1,
-      category: "INDUSTRIAL PROJECT",
-      title: "Process Plant Electrical Installation",
-      description: "E&I works for a leading chemical manufacturer.",
-      img: "/images/projects/industrial.jpg",
+      category: "BUILDING PROJECT",
+      title: "Building Projects",
+      description: "Turnkey electrical infrastructure and execution for modern commercial and residential complexes.",
+      img: "/images/projects/building-1.jpg",
       href: "#projects",
     },
     {
       id: 2,
-      category: "INFRASTRUCTURE PROJECT",
-      title: "Substation & Power Distribution",
-      description: "132/33 kV substation and related electrical works.",
-      img: "/images/projects/substation.jpg",
+      category: "EDUCATIONAL PROJECT",
+      title: "Educational Projects",
+      description: "Comprehensive campus power distribution, substations, and electrical solutions.",
+      img: "/images/projects/educational-1.jpg",
+      href: "#projects",
+    },
+    {
+      id: 3,
+      category: "HOSPITALITY PROJECT",
+      title: "Hospitality Projects",
+      description: "Turnkey electrical installations, architectural lighting, and power infrastructure for luxury hospitality venues.",
+      img: "/images/projects/hospitality-1.jpg",
       href: "#projects",
     },
   ];
@@ -58,7 +66,7 @@ const Project_2 = () => {
         </motion.div>
 
         {/* 2-Column Large Featured Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {featuredProjects.map((project, index) => (
             <motion.a
               key={project.id}
@@ -67,7 +75,6 @@ const Project_2 = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -6 }}
               className="relative rounded-sm overflow-hidden shadow-md group cursor-pointer h-64 sm:h-76 md:h-[330px] lg:h-[360px] flex flex-col justify-end p-5 sm:p-7 lg:p-8"
             >
               {/* Background Image */}

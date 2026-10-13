@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaPhoneAlt, FaLinkedinIn, FaSearch, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaLinkedinIn,
+  FaSearch,
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+  FaFilePdf,
+  FaDownload,
+} from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
+import BrochureModal from "../common/BrochureModal";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [mobileHomeDropdownOpen, setMobileHomeDropdownOpen] = useState(true);
+  const [isBrochureOpen, setIsBrochureOpen] = useState(false);
 
   const location = useLocation();
 
@@ -63,8 +74,21 @@ const Header = () => {
             </a>
           </div>
 
-          {/* Social & Search */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          {/* Social, E-Brochure & Search */}
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+            {/* Quick E-Brochure Link on Top Bar for desktop & tablets */}
+            <button
+              type="button"
+              onClick={() => setIsBrochureOpen(true)}
+              className="hidden sm:inline-flex items-center gap-1.5 hover:text-[#F1C652] transition-colors cursor-pointer text-xs font-semibold"
+              title="SEPL Corporate Brochure"
+            >
+              <FaFilePdf className="text-red-400 text-xs shrink-0" />
+              <span className="whitespace-nowrap">E-Brochure</span>
+            </button>
+
+            <span className="hidden sm:inline-block text-white/30">|</span>
+
             <a
               href="https://linkedin.com"
               target="_blank"
@@ -120,7 +144,7 @@ const Header = () => {
       <div className="bg-white">
         <div className="container flex justify-between items-center">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center h-15 md:h-18 lg:h-25 shrink-0">
+          <Link to="/" className="flex items-center h-15 md:h-18 lg:h-24 shrink-0">
             <img
               className="h-full w-auto object-contain"
               src="/images/logo/logo.png"
@@ -128,82 +152,114 @@ const Header = () => {
             />
           </Link>
 
-          {/* Desktop Navigation Links (>= lg: 1024px) */}
-          <nav className="hidden lg:flex items-center">
-            <ul className="flex items-center gap-5 xl:gap-8 uppercase font-bold text-xs xl:text-sm text-[#0E2A62] tracking-wider">
-              {navLinks.map((link) => {
-                const isActive = link.name === "Home" && isHomeActive;
+          {/* Desktop Navigation Links + Brochure CTA (>= lg: 1024px) */}
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+            <nav>
+              <ul className="flex items-center gap-4 xl:gap-7 uppercase font-bold text-xs xl:text-sm text-[#0E2A62] tracking-wider">
+                {navLinks.map((link) => {
+                  const isActive = link.name === "Home" && isHomeActive;
 
-                return (
-                  <li key={link.name} className="relative group py-6">
-                    {/* If link has sub-pages (Home 1, Home 2) */}
-                    {link.subLinks ? (
-                      <>
-                        <div
-                          className={`flex items-center gap-1.5 cursor-pointer transition-colors duration-200 ${
-                            isActive ? "text-[#F1C652]" : "hover:text-[#F1C652]"
+                  return (
+                    <li key={link.name} className="relative group py-6">
+                      {/* If link has sub-pages (Home 1, Home 2) */}
+                      {link.subLinks ? (
+                        <>
+                          <div
+                            className={`flex items-center gap-1.5 cursor-pointer transition-colors duration-200 ${
+                              isActive ? "text-[#F1C652]" : "hover:text-[#F1C652]"
+                            }`}
+                          >
+                            <span>{link.name}</span>
+                            <FaChevronDown className="text-[10px] opacity-75 group-hover:rotate-180 transition-transform duration-200" />
+                          </div>
+
+                          {/* Dropdown Menu for Home Variations */}
+                          <div className="absolute top-full left-0 w-44 bg-white border border-slate-100 rounded-lg shadow-xl py-2 hidden group-hover:block transition-all z-50">
+                            {link.subLinks.map((sub) => {
+                              const isSubActive =
+                                (sub.href === "/" &&
+                                  (location.pathname === "/" ||
+                                    location.pathname === "/home" ||
+                                    location.pathname === "/home-1")) ||
+                                sub.href === location.pathname;
+
+                              return (
+                                <Link
+                                  key={sub.name}
+                                  to={sub.href}
+                                  className={`flex items-center justify-between px-4 py-2.5 text-xs font-bold tracking-wider hover:bg-slate-50 transition-colors ${
+                                    isSubActive
+                                      ? "text-[#F1C652] bg-slate-50/80"
+                                      : "text-[#0E2A62] hover:text-[#F1C652]"
+                                  }`}
+                                >
+                                  <span>{sub.name}</span>
+                                  {isSubActive && (
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#F1C652]"></span>
+                                  )}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className={`flex items-center gap-1 transition-colors duration-200 ${
+                            link.active ? "text-[#F1C652]" : "hover:text-[#F1C652]"
                           }`}
                         >
                           <span>{link.name}</span>
-                          <FaChevronDown className="text-[10px] opacity-75 group-hover:rotate-180 transition-transform duration-200" />
-                        </div>
+                          {link.hasDropdown && (
+                            <FaChevronDown className="text-[10px] opacity-75 group-hover:rotate-180 transition-transform duration-200" />
+                          )}
+                        </a>
+                      )}
 
-                        {/* Dropdown Menu for Home Variations */}
-                        <div className="absolute top-full left-0 w-44 bg-white border border-slate-100 rounded-lg shadow-xl py-2 hidden group-hover:block transition-all z-50">
-                          {link.subLinks.map((sub) => {
-                            const isSubActive =
-                              (sub.href === "/" && (location.pathname === "/" || location.pathname === "/home" || location.pathname === "/home-1")) ||
-                              sub.href === location.pathname;
+                      {/* Active Indicator Underline */}
+                      {isActive && (
+                        <span className="absolute bottom-4 left-0 w-full h-[2.5px] bg-[#F1C652] rounded-full"></span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
-                            return (
-                              <Link
-                                key={sub.name}
-                                to={sub.href}
-                                className={`flex items-center justify-between px-4 py-2.5 text-xs font-bold tracking-wider hover:bg-slate-50 transition-colors ${
-                                  isSubActive
-                                    ? "text-[#F1C652] bg-slate-50/80"
-                                    : "text-[#0E2A62] hover:text-[#F1C652]"
-                                }`}
-                              >
-                                <span>{sub.name}</span>
-                                {isSubActive && (
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#F1C652]"></span>
-                                )}
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      </>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className={`flex items-center gap-1 transition-colors duration-200 ${
-                          link.active ? "text-[#F1C652]" : "hover:text-[#F1C652]"
-                        }`}
-                      >
-                        <span>{link.name}</span>
-                        {link.hasDropdown && (
-                          <FaChevronDown className="text-[10px] opacity-75 group-hover:rotate-180 transition-transform duration-200" />
-                        )}
-                      </a>
-                    )}
+            {/* Desktop Header Brochure CTA Button */}
+            <button
+              type="button"
+              onClick={() => setIsBrochureOpen(true)}
+              className="group inline-flex items-center gap-2 bg-[#F1C652] hover:bg-[#0E2A62] text-[#0E2A62] hover:text-white font-bold text-xs xl:text-sm px-3.5 xl:px-4.5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border border-[#F1C652] shrink-0"
+              aria-label="Download SEPL Brochure"
+            >
+              <FaFilePdf className="text-red-600 group-hover:text-[#F1C652] text-sm shrink-0 transition-colors" />
+              <span className="whitespace-nowrap">SEPL Brochure</span>
+              <FaDownload className="text-[11px] group-hover:translate-y-0.5 transition-transform shrink-0" />
+            </button>
+          </div>
 
-                    {/* Active Indicator Underline */}
-                    {isActive && (
-                      <span className="absolute bottom-4 left-0 w-full h-[2.5px] bg-[#F1C652] rounded-full"></span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          {/* Mobile / Tablet Controls (< 1024px): Quick Brochure Button + Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-3 lg:hidden py-3">
+            {/* Responsive Brochure Button in Header for Mobile & Tablet */}
+            <button
+              type="button"
+              onClick={() => setIsBrochureOpen(true)}
+              className="inline-flex items-center gap-1.5 bg-[#F1C652] hover:bg-[#e2b740] active:scale-95 text-[#0E2A62] font-bold text-xs px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg shadow-xs transition-all cursor-pointer shrink-0"
+              aria-label="Download SEPL Brochure"
+            >
+              <FaFilePdf className="text-red-600 text-xs shrink-0" />
+              <span className="whitespace-nowrap text-xs font-bold tracking-tight">
+                Brochure
+              </span>
+              <FaDownload className="text-[10px] shrink-0" />
+            </button>
 
-          {/* Mobile / Tablet Hamburger Toggle (< 1024px) */}
-          <div className="flex items-center gap-2 lg:hidden py-3">
+            {/* Hamburger Toggle */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="p-2 text-[#0E2A62] hover:text-[#F1C652] hover:bg-slate-100 rounded transition-colors cursor-pointer"
+              className="p-2 text-[#0E2A62] hover:text-[#F1C652] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
             >
@@ -236,6 +292,20 @@ const Header = () => {
               </button>
             </div>
 
+            {/* Prominent Brochure Download CTA inside Mobile Menu */}
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsBrochureOpen(true);
+              }}
+              className="w-full flex items-center justify-center gap-2.5 bg-[#0E2A62] hover:bg-[#07193f] active:scale-[0.99] text-[#F1C652] py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer border border-[#F1C652]/30"
+            >
+              <FaFilePdf className="text-red-500 text-sm shrink-0" />
+              <span>Download SEPL Corporate Brochure</span>
+              <FaDownload className="text-xs shrink-0" />
+            </button>
+
             {/* Mobile Menu Links */}
             <nav>
               <ul className="flex flex-col divide-y divide-slate-100">
@@ -264,7 +334,10 @@ const Header = () => {
                           <div className="pl-4 pb-2 pt-1 flex flex-col space-y-2 border-l-2 border-[#F1C652] ml-1 my-1">
                             {link.subLinks.map((sub) => {
                               const isSubActive =
-                                (sub.href === "/" && (location.pathname === "/" || location.pathname === "/home" || location.pathname === "/home-1")) ||
+                                (sub.href === "/" &&
+                                  (location.pathname === "/" ||
+                                    location.pathname === "/home" ||
+                                    location.pathname === "/home-1")) ||
                                 sub.href === location.pathname;
 
                               return (
@@ -326,6 +399,12 @@ const Header = () => {
           </div>
         </div>
       )}
+
+      {/* Brochure Modal Dialog */}
+      <BrochureModal
+        isOpen={isBrochureOpen}
+        onClose={() => setIsBrochureOpen(false)}
+      />
     </header>
   );
 };

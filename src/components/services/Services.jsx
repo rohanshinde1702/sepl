@@ -1,37 +1,34 @@
 import { motion } from "framer-motion";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { MdOutlineOutbox } from "react-icons/md";
-import { BsCart3 } from "react-icons/bs";
-import { LuHardHat } from "react-icons/lu";
-import { AiOutlineThunderbolt } from "react-icons/ai";
-import { IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineHomeWork, MdOutlineElectricalServices } from "react-icons/md";
+import { PiCircuitry, PiNetwork, PiGauge } from "react-icons/pi";
 
 const Services = () => {
   const services = [
     {
       id: 1,
-      icon: <MdOutlineOutbox />,
-      title: "Design & Engineering",
+      icon: <MdOutlineHomeWork />,
+      title: "Home Automation",
     },
     {
       id: 2,
-      icon: <BsCart3 />,
-      title: "Procurement",
+      icon: <MdOutlineElectricalServices />,
+      title: "Electrical Design and Execution",
     },
     {
       id: 3,
-      icon: <LuHardHat />,
-      title: "Construction & Installation",
+      icon: <PiCircuitry />,
+      title: "Electrical Maintenance Service",
     },
     {
       id: 4,
-      icon: <AiOutlineThunderbolt />,
-      title: "Testing & Commissioning",
+      icon: <PiNetwork />,
+      title: "Data Networking",
     },
     {
       id: 5,
-      icon: <IoSettingsOutline />,
-      title: "Maintenance & Support",
+      icon: <PiGauge />,
+      title: "Energy Auditing",
     },
   ];
 
@@ -75,8 +72,7 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="bg-white rounded-lg p-5 sm:p-6 flex flex-col justify-between min-h-[160px] shadow-md transition-shadow duration-300 group cursor-pointer border border-transparent hover:border-[#F1C652]/60 hover:shadow-xl"
+              className="bg-white rounded-lg p-5 sm:p-6 flex flex-col justify-between min-h-[160px] shadow-md transition-shadow duration-300 group cursor-pointer border border-transparent hover:border-[#F1C652] border-2 hover:shadow-xl"
             >
               {/* Card Icon */}
               <div className="text-3xl sm:text-4xl text-[#0E2A62] group-hover:text-[#F1C652] transition-colors duration-300">

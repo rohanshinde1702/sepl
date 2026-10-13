@@ -86,9 +86,9 @@ const Hero = () => {
         speed={1000}
         loop={true}
         autoplay={{
-          delay: 5500,
+          delay: 3000,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true,
+          pauseOnMouseEnter: false,
         }}
         navigation={{
           prevEl: ".hero-prev-btn",

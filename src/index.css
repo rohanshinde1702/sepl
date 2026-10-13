@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-active, "Raleway", sans-serif);
+}
 
 body, html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: var(--font-active, "Raleway", sans-serif);
 }
 
 .container {
@@ -78,4 +84,29 @@ body, html {
     width: 32px;
     background-color: #F1C652;
     border-radius: 9999px;
+}
+
+/* Continuous Vertical Marquee for News */
+@keyframes verticalScroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.animate-news-marquee {
+    animation: verticalScroll 10s linear infinite;
+}
+
+.animate-news-marquee:hover,
+.news-marquee-container:hover .animate-news-marquee {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-news-marquee {
+        animation-play-state: paused;
+    }
 }
