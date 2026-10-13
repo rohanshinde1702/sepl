@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+body, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+/* Swiper Custom Pagination Bullets for Projects & Testimonials */
+.project-custom-pagination .swiper-pagination-bullet,
+.testimonial-custom-pagination .swiper-pagination-bullet,
+.testimonial2-custom-pagination .swiper-pagination-bullet,
+.testimonial2-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: #cbd5e1;
+    opacity: 1;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.project-custom-pagination .swiper-pagination-bullet-active,
+.testimonial-custom-pagination .swiper-pagination-bullet-active,
+.testimonial2-custom-pagination .swiper-pagination-bullet-active,
+.testimonial2-bullet-active {
+    width: 24px;
+    background-color: #0E2A62;
+    border-radius: 9999px;
+}
+
+/* Swiper Custom Pagination Bullets for Hero Sliders */
+.hero-custom-pagination .swiper-pagination-bullet,
+.hero2-custom-pagination .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.45);
+    opacity: 1;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.hero-custom-pagination .swiper-pagination-bullet-active,
+.hero2-custom-pagination .swiper-pagination-bullet-active {
+    width: 32px;
+    background-color: #F1C652;
+    border-radius: 9999px;
+}
