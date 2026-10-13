@@ -142,7 +142,7 @@ const LetestNews = () => {
               {applications.map((app) => (
                 <div
                   key={app.id}
-                  className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-2.5 hover:border-[#F1C652] hover:shadow-md transition-all duration-300 group cursor-pointer h-full min-h-[160px] sm:min-h-0"
+                  className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-2.5 hover:border-[#F1C652] transition-all duration-300 group cursor-pointer h-full min-h-[160px] sm:min-h-0"
                 >
                   <div className="text-2xl sm:text-3xl text-[#0E2A62] group-hover:text-[#F1C652] group-hover:scale-110 transition-all duration-200">
                     {app.icon}

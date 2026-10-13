@@ -126,9 +126,9 @@ const Footer = () => {
         <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
           {/* Copyright & Credits */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-center sm:text-left">
-            <span>Copyright &copy; 2013 SEPL All rights reserved.</span>
+            <span>Copyright &copy; 2026 SEPL All rights reserved.</span>
             <span className="hidden sm:inline text-slate-600">|</span>
-            <span>Designed by <a className="hover:text-[#F1C652] transition-all duration-300" href="https://futurefacetech.in/">Future Face Tech</a></span>
+            <span>Designed & Developed by <a className="hover:text-[#F1C652] transition-all duration-300" href="https://futurefacetech.in/">Future Face Tech</a></span>
           </div>
 
           {/* Social Media Links */}
