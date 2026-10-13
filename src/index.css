@@ -41,6 +41,16 @@ body, html {
         padding-right: 2.5rem;
     }
 }
+/* Ensure Swiper slide stretch for equal height cards in carousels */
+.swiper-wrapper {
+    align-items: stretch;
+}
+
+.swiper-slide {
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+}
 
 /* Swiper Custom Pagination Bullets for Projects & Testimonials */
 .project-custom-pagination .swiper-pagination-bullet,

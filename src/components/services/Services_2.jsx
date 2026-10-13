@@ -64,7 +64,7 @@ const Services_2 = () => {
         </motion.div>
 
         {/* 4 Services Columns with vertical dividers on desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 items-stretch">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -73,7 +73,7 @@ const Services_2 = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.12 }}
               whileHover={{ y: -6 }}
-              className={`flex flex-col items-start justify-between gap-4 p-4 sm:p-6 lg:px-6 xl:px-8 group transition-colors duration-300 ${
+              className={`flex flex-col items-start justify-between gap-4 p-4 sm:p-6 lg:px-4 xl:px-8 h-full min-h-[220px] sm:min-h-[240px] lg:min-h-[250px] group transition-colors duration-300 ${
                 index < 3
                   ? "lg:border-r lg:border-slate-200"
                   : ""
@@ -84,12 +84,12 @@ const Services_2 = () => {
               }`}
             >
               {/* Service Icon */}
-              <div className="text-4xl sm:text-5xl text-[#0E2A62] group-hover:text-[#F1C652] transition-colors duration-300">
+              <div className="text-4xl sm:text-5xl text-[#0E2A62] group-hover:text-[#F1C652] transition-colors duration-300 shrink-0">
                 {service.icon}
               </div>
 
               {/* Title & Description */}
-              <div className="flex flex-col gap-2 flex-1 pt-2">
+              <div className="flex flex-col gap-2 flex-1 pt-2 w-full">
                 <h3 className="text-[#0E2A62] text-lg sm:text-xl font-bold tracking-tight leading-snug">
                   {service.title}
                 </h3>
@@ -99,7 +99,7 @@ const Services_2 = () => {
               </div>
 
               {/* Gold Bottom Bar Accent */}
-              <div className="w-12 h-[3px] bg-[#F1C652] rounded-full mt-2 group-hover:w-16 transition-all duration-300"></div>
+              <div className="w-12 h-[3px] bg-[#F1C652] rounded-full mt-auto group-hover:w-16 transition-all duration-300 shrink-0"></div>
             </motion.div>
           ))}
         </div>

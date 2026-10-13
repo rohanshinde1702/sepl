@@ -14,31 +14,36 @@ const Project = () => {
       id: 1,
       img: "/images/projects/building-1.jpg",
       title: "Building Projects",
+      subTitle: "Commercial & Residential Infrastructure",
       category: "Buildings",
     },
     {
       id: 2,
       img: "/images/projects/educational-1.jpg",
       title: "Educational Projects",
+      subTitle: "Campus Electrification & Substations",
       category: "Educational",
     },
     {
       id: 3,
       img: "/images/projects/hospitality-1.jpg",
       title: "News Cafe Delhi Restaurant",
+      subTitle: "Architectural Lighting & Power Systems",
       category: "Hospitality",
     },
     {
       id: 4,
       img: "/images/projects/deloitte.jpg",
       title: "Deloitte Office",
+      subTitle: "Turnkey Corporate Office Fit-outs",
       category: "Offices",
     },
     {
       id: 5,
       img: "/images/projects/showroom-1.jpg",
       title: "Fcml Showrooms",
-      category: "showrooms",
+      subTitle: "Retail Experience Center Engineering",
+      category: "Showrooms",
     },
   ];
 
@@ -92,7 +97,7 @@ const Project = () => {
                   spaceBetween: 20,
                 },
                 1024: {
-                  slidesPerView: 2.5,
+                  slidesPerView: 2.3,
                   spaceBetween: 20,
                 },
                 1280: {
@@ -117,10 +122,10 @@ const Project = () => {
               className="pb-2"
             >
               {projects.map((item) => (
-                <SwiperSlide key={item.id} className="h-auto">
-                  <div className="bg-white rounded-xl overflow-hidden border border-slate-200/90 shadow-xs transition-all duration-300 flex flex-col h-full group cursor-pointer">
+                <SwiperSlide key={item.id} className="!h-auto flex flex-col">
+                  <div className="bg-white rounded-xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col flex-1 h-full group cursor-pointer">
                     {/* Project Card Image */}
-                    <div className="h-44 sm:h-48 md:h-52 w-full overflow-hidden relative bg-slate-100">
+                    <div className="h-44 sm:h-48 md:h-48 lg:h-48 xl:h-52 w-full overflow-hidden relative bg-slate-100 shrink-0">
                       <img
                         src={item.img}
                         alt={item.title}
@@ -134,17 +139,17 @@ const Project = () => {
 
                     {/* Project Details */}
                     <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white">
-                      <div>
-                        <h3 className="text-base sm:text-lg font-bold text-[#0E2A62] group-hover:text-[#0E2A62] transition-colors leading-snug">
+                      <div className="min-h-[58px] sm:min-h-[62px] flex flex-col justify-start">
+                        <h3 className="text-base sm:text-lg font-bold text-[#0E2A62] group-hover:text-[#0E2A62] transition-colors leading-snug line-clamp-1 sm:line-clamp-2">
                           {item.title}
                         </h3>
-                        <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
+                        <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1 line-clamp-1">
                           {item.subTitle}
                         </p>
                       </div>
 
                       {/* View Details Link */}
-                      <div className="pt-4 border-t border-slate-100 mt-4 flex items-center justify-between">
+                      <div className="pt-3.5 sm:pt-4 border-t border-slate-100 mt-auto flex items-center justify-between shrink-0">
                         <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0E2A62] group-hover:text-[#F1C652] transition-colors">
                           <span>View Details</span>
                           <FaArrowRightLong className="group-hover:translate-x-1.5 transition-transform duration-300 text-xs" />

@@ -85,12 +85,12 @@ const TopBar = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`flex items-start justify-start sm:justify-center gap-3.5 sm:gap-4 xl:gap-5 ${getBorderClasses(
+              className={`flex items-start justify-start sm:justify-center gap-3.5 sm:gap-4 xl:gap-5 h-full ${getBorderClasses(
                 index
               )}`}
             >
               {/* Feature Icon */}
-              <div className="text-4xl sm:text-4xl lg:text-5xl text-[#0E2A62] shrink-0 mt-0.5">
+              <div className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl text-[#0E2A62] shrink-0 mt-0.5">
                 {item.icon}
               </div>
 

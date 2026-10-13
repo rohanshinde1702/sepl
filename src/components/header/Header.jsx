@@ -144,7 +144,7 @@ const Header = () => {
       <div className="bg-white">
         <div className="container flex justify-between items-center">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center h-15 md:h-18 lg:h-24 shrink-0">
+          <Link to="/" className="flex items-center h-14 sm:h-16 md:h-18 lg:h-20 xl:h-24 shrink-0">
             <img
               className="h-full w-auto object-contain"
               src="/images/logo/logo.png"
@@ -153,9 +153,9 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation Links + Brochure CTA (>= lg: 1024px) */}
-          <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-6 shrink-0">
             <nav>
-              <ul className="flex items-center gap-4 xl:gap-7 uppercase font-bold text-xs xl:text-sm text-[#0E2A62] tracking-wider">
+              <ul className="flex items-center gap-3 xl:gap-6 uppercase font-bold text-xs xl:text-sm text-[#0E2A62] tracking-wider">
                 {navLinks.map((link) => {
                   const isActive = link.name === "Home" && isHomeActive;
 

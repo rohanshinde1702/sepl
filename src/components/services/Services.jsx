@@ -64,7 +64,7 @@ const Services = () => {
         </motion.div>
 
         {/* Services Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 lg:gap-4 xl:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 lg:gap-3 xl:gap-6 items-stretch">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -72,20 +72,20 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-lg p-5 sm:p-6 flex flex-col justify-between min-h-[160px] shadow-md transition-shadow duration-300 group cursor-pointer border border-transparent hover:border-[#F1C652] border-2 hover:shadow-xl"
+              className="bg-white rounded-lg p-5 sm:p-5 lg:p-4 xl:p-6 flex flex-col justify-between h-full min-h-[190px] sm:min-h-[200px] md:min-h-[210px] lg:min-h-[210px] xl:min-h-[220px] shadow-md transition-shadow duration-300 group cursor-pointer border-2 border-transparent hover:border-[#F1C652] hover:shadow-xl"
             >
               {/* Card Icon */}
-              <div className="text-3xl sm:text-4xl text-[#0E2A62] group-hover:text-[#F1C652] transition-colors duration-300">
+              <div className="text-3xl sm:text-4xl text-[#0E2A62] group-hover:text-[#F1C652] transition-colors duration-300 shrink-0">
                 {service.icon}
               </div>
 
               {/* Title & Arrow */}
-              <div className="flex flex-col gap-3 pt-4">
-                <h3 className="text-[#0E2A62] font-bold text-sm sm:text-base xl:text-lg leading-snug">
+              <div className="flex flex-col flex-1 justify-between gap-3 pt-4">
+                <h3 className="text-[#0E2A62] font-bold text-sm sm:text-base lg:text-[15px] xl:text-lg leading-snug">
                   {service.title}
                 </h3>
 
-                <div className="text-[#0E2A62] text-sm group-hover:text-[#F1C652] flex items-center transition-colors duration-300">
+                <div className="text-[#0E2A62] text-sm group-hover:text-[#F1C652] flex items-center transition-colors duration-300 mt-auto pt-2">
                   <FaArrowRightLong className="group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
               </div>

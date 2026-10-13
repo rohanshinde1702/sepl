@@ -15,54 +15,54 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+const testimonials = [
+  {
+    id: 1,
+    quote:
+      "Your team has completed the project successfully and shown a high level of professionalism and involvement in the project. It's a real achievement when the staff does this in the absence of the team leader. It's a pleasure working with SEPL.",
+    author: "Ujwala Kumthekar",
+    role: "Architect",
+    company: "",
+  },
+  {
+    id: 2,
+    quote:
+      "We at Talati and Panthaky Associates have been working with Subhash Electricals for over 20 years and have had a longstanding professional and personal relationship with them. They are our primary electrical contractors by choice and over the years we have successfully worked on countless projects together. They have always been on the cutting edge of technology, always keeping up with new trends and keeping us designers in the loop… And they have always had the best understanding of the requirement of our clients, integrating our designs to suit not only their needs but also the difficult Mumbai climate, while working out the electrical solutions in tandem with us. We are happy to have this relationship with them and wish them the best for all their future ventures!",
+    author: "Ria Talati",
+    role: "Director",
+    company: "Talati & Panthaky Associated Pvt Ltd",
+  },
+  {
+    id: 3,
+    quote:
+      "The team at SEPL has shown an exceptional performance in their execution. Raising the standards in accuracy and precision along with efficiency and top-notch quality in their work.",
+    author: "",
+    role: "",
+    company: "",
+  },
+  {
+    id: 4,
+    quote:
+      "SEPL has delivered its promise beyond our expectations. The way they go about every step of the project, right from the planning, to the organizing and the coordination to the execution. This experience has been just wonderful.",
+    author: "",
+    role: "",
+    company: "",
+  },
+  {
+    id: 5,
+    quote:
+      "SEPL is one of those very few companies, who have strong virtues and business ethics. With a team of professionals, they make sure their final execution is state-of-the-art.",
+    author: "",
+    role: "",
+    company: "",
+  },
+];
+
 const Testimonial = () => {
   const [expandedId, setExpandedId] = useState(null);
   const [modalItem, setModalItem] = useState(null);
   const swiperRef = useRef(null);
   const containerRef = useRef(null);
-
-  const testimonials = [
-    {
-      id: 1,
-      quote:
-        "Your team has completed the project successfully and shown a high level of professionalism and involvement in the project. It's a real achievement when the staff does this in the absence of the team leader. It's a pleasure working with SEPL.",
-      author: "Ujwala Kumthekar",
-      role: "Architect",
-      company: "",
-    },
-    {
-      id: 2,
-      quote:
-        "We at Talati and Panthaky Associates have been working with Subhash Electricals for over 20 years and have had a longstanding professional and personal relationship with them. They are our primary electrical contractors by choice and over the years we have successfully worked on countless projects together. They have always been on the cutting edge of technology, always keeping up with new trends and keeping us designers in the loop… And they have always had the best understanding of the requirement of our clients, integrating our designs to suit not only their needs but also the difficult Mumbai climate, while working out the electrical solutions in tandem with us. We are happy to have this relationship with them and wish them the best for all their future ventures!",
-      author: "Ria Talati",
-      role: "Director",
-      company: "Talati & Panthaky Associated Pvt Ltd",
-    },
-    {
-      id: 3,
-      quote:
-        "The team at SEPL has shown an exceptional performance in their execution. Raising the standards in accuracy and precision along with efficiency and top-notch quality in their work.",
-      author: "",
-      role: "",
-      company: "",
-    },
-    {
-      id: 4,
-      quote:
-        "SEPL has delivered its promise beyond our expectations. The way they go about every step of the project, right from the planning, to the organizing and the coordination to the execution. This experience has been just wonderful.",
-      author: "",
-      role: "",
-      company: "",
-    },
-    {
-      id: 5,
-      quote:
-        "SEPL is one of those very few companies, who have strong virtues and business ethics. With a team of professionals, they make sure their final execution is state-of-the-art.",
-      author: "",
-      role: "",
-      company: "",
-    },
-  ];
 
   const handleToggle = (id, targetBtn) => {
     const card = targetBtn ? targetBtn.closest(".testimonial-card") : null;
@@ -124,7 +124,7 @@ const Testimonial = () => {
     return () => {
       container.removeEventListener("click", handleContainerClick);
     };
-  }, [testimonials]);
+  }, []);
 
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#f1f1f1] w-full overflow-hidden relative">
@@ -185,10 +185,10 @@ const Testimonial = () => {
 
                 return (
                   <SwiperSlide key={item.id} className="!h-auto flex flex-col">
-                    <div className="testimonial-card flex-1 bg-white rounded-2xl p-6 sm:p-7 md:p-8 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[320px] sm:min-h-[340px] md:min-h-[350px] group relative">
+                    <div className="testimonial-card flex-1 bg-white rounded-2xl p-5 sm:p-6 lg:p-6 xl:p-8 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full min-h-[370px] sm:min-h-[380px] md:min-h-[390px] lg:min-h-[390px] xl:min-h-[390px] group relative">
                       {/* Top: Quote Icon & Testimonial Text */}
-                      <div className="flex flex-col gap-3 sm:gap-4">
-                        <div className="flex items-center justify-between">
+                      <div className="flex flex-col gap-3 sm:gap-4 flex-1">
+                        <div className="flex items-center justify-between shrink-0">
                           {/* Quote Mark Icon */}
                           <div className="text-[#F1C652] text-3xl sm:text-4xl">
                             <FaQuoteLeft />
@@ -213,7 +213,7 @@ const Testimonial = () => {
                         </div>
 
                         {/* Quote Text */}
-                        <div>
+                        <div className="min-h-[140px] sm:min-h-[145px] lg:min-h-[150px] flex flex-col justify-between">
                           <p
                             className={`testimonial-quote-text text-slate-600 text-sm sm:text-[15px] leading-relaxed italic font-normal transition-all duration-300 ${
                               isLong && !isExpanded ? "line-clamp-4" : ""
@@ -231,7 +231,7 @@ const Testimonial = () => {
                                 e.stopPropagation();
                                 handleToggle(item.id, e.currentTarget);
                               }}
-                              className="swiper-no-swiping mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#0E2A62] hover:text-[#F1C652] transition-colors cursor-pointer group/btn relative z-10"
+                              className="swiper-no-swiping mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#0E2A62] hover:text-[#F1C652] transition-colors cursor-pointer group/btn relative z-10 self-start"
                             >
                               <span className="btn-text">
                                 {isExpanded ? "Read Less" : "Read More"}
@@ -249,7 +249,7 @@ const Testimonial = () => {
                       </div>
 
                       {/* Bottom: Author Details */}
-                      <div className="pt-5 mt-4 border-t border-slate-100 flex flex-col justify-center min-h-[56px]">
+                      <div className="pt-4 mt-auto border-t border-slate-100 flex flex-col justify-center min-h-[64px] sm:min-h-[68px] shrink-0">
                         <div className="flex flex-wrap items-center gap-1.5 text-sm sm:text-base">
                           <span className="font-bold text-[#0E2A62]">
                             {item.author || "Client Testimonial"}
@@ -264,7 +264,7 @@ const Testimonial = () => {
                           )}
                         </div>
                         {item.company ? (
-                          <span className="text-xs text-slate-500 font-normal mt-0.5">
+                          <span className="text-xs text-slate-500 font-normal mt-0.5 line-clamp-1">
                             {item.company}
                           </span>
                         ) : (

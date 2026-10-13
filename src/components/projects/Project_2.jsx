@@ -75,7 +75,7 @@ const Project_2 = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="relative rounded-sm overflow-hidden shadow-md group cursor-pointer h-64 sm:h-76 md:h-[330px] lg:h-[360px] flex flex-col justify-end p-5 sm:p-7 lg:p-8"
+              className="relative rounded-sm overflow-hidden shadow-md group cursor-pointer h-64 sm:h-76 md:h-[340px] lg:h-[370px] xl:h-[380px] flex flex-col justify-end p-5 sm:p-6 lg:p-6 xl:p-8"
             >
               {/* Background Image */}
               <img

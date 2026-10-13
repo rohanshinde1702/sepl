@@ -109,23 +109,27 @@ const AboutUs = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="border border-slate-200 rounded-xl p-4 sm:p-5 lg:p-6 bg-slate-50/70 shadow-xs"
             >
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-0">
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-6 xl:gap-0">
                 {aboutInfo.map((item, index) => (
                   <div
                     key={item.id}
-                    className={`flex items-center gap-3 sm:gap-3.5 ${
+                    className={`flex items-center gap-3 sm:gap-3.5 h-full ${
+                      index % 2 === 0
+                        ? "sm:border-r sm:border-slate-200/80 sm:pr-4 lg:pr-5 xl:border-r-0 xl:pr-0"
+                        : "sm:pl-3 lg:pl-4 xl:pl-0"
+                    } ${
                       index < 3
-                        ? "lg:border-r lg:border-slate-200 lg:pr-4 xl:pr-6"
+                        ? "xl:border-r xl:border-slate-200 xl:pr-5"
                         : ""
-                    } ${index > 0 ? "lg:pl-4 xl:pl-6" : ""}`}
+                    } ${index > 0 ? "xl:pl-5" : ""}`}
                   >
                     {/* Stat Icon */}
-                    <div className="text-2xl sm:text-3xl lg:text-4xl text-[#0E2A62] shrink-0">
+                    <div className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl text-[#0E2A62] shrink-0">
                       {item.icon}
                     </div>
 
                     {/* Stat Details */}
-                    <div className="flex flex-col">
+                    <div className="flex flex-col justify-center">
                       {item.id === 1 ? (
                         <>
                           <span className="text-[11px] sm:text-xs text-slate-500 uppercase tracking-wide font-medium">

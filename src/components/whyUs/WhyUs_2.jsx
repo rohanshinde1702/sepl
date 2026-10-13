@@ -75,11 +75,11 @@ const WhyUs_2 = () => {
             className="w-full lg:w-[50%] xl:w-[52%]"
           >
             {/* Mobile View: 2x2 Grid with subtle border */}
-            <div className="grid grid-cols-2 gap-6 sm:hidden">
+            <div className="grid grid-cols-2 gap-6 sm:hidden items-stretch">
               {pillars.map((pillar) => (
                 <div
                   key={pillar.id}
-                  className="flex flex-col items-center text-center p-3 rounded-lg bg-black/20 backdrop-blur-xs border border-[#F1C652]/20"
+                  className="flex flex-col items-center justify-center text-center p-3 rounded-lg bg-black/20 backdrop-blur-xs border border-[#F1C652]/20 h-full min-h-[110px]"
                 >
                   <div className="text-[#F1C652] mb-2">{pillar.icon}</div>
                   <span className="text-white font-bold text-xs leading-snug">
@@ -96,7 +96,7 @@ const WhyUs_2 = () => {
               {pillars.map((pillar, index) => (
                 <Fragment key={pillar.id}>
                   {/* Pillar Card with Equal flex-1 Width */}
-                  <div className="flex-1 flex flex-col items-center justify-center text-center px-1 sm:px-2 md:px-3 lg:px-2 xl:px-4 group cursor-default">
+                  <div className="flex-1 flex flex-col items-center justify-center text-center px-1 sm:px-2 md:px-3 lg:px-2 xl:px-4 group cursor-default h-full min-h-[100px]">
                     {/* Gold Icon */}
                     <div className="text-[#F1C652] mb-2 sm:mb-2.5 md:mb-3 group-hover:scale-110 transition-transform duration-300">
                       {pillar.icon}
